@@ -1,0 +1,20 @@
+- name: Install applications
+  hosts: localhost
+  become: yes
+  vars:
+    dns_server: 10.1.250.10
+  tasks:
+    - name: Install list of applications
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - "{{ app_list }}"
+      command: 'echo "All applications has been installed"'
+
+    - name: Set up user
+      user:
+        name: "admin"
+        password: "secret_pass"
+        comment: "admin@email.com"
+        state: present

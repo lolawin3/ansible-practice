@@ -1,0 +1,26 @@
+#Firewall Configurations
+- firewall:
+    service: http
+    permanent: yes
+    state: enabled
+    port: 80/tcp
+    name: Set Firewall Configurations
+    hosts: web
+    tasks:
+      - firewalld:
+          servive: https
+          permanent: true
+          state: enabled
+      - firewalld:
+          port: 8081/tcp
+          permanent: true
+          state: disabled
+      - firewalld:
+          port: 8082/tcp
+          permanent: true
+          state: disabled
+      - firewalld:
+          source: 192.168.0.0/24
+          permanent: true
+          state: enabled
+          zone: internal
